@@ -8,6 +8,41 @@ export default function PostPage() {
   const [postInfo,setPostInfo] = useState(null);
   const {userInfo} = useContext(UserContext);
   const {id} = useParams();
+
+  const [comment, setComment] = useState('');
+  const [showComments, setShowComments] = useState([])
+  // console.log(postInfo.comments[0].comment);
+  //       setShowComments(comments)
+  // console.log(showComments);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const postId = postInfo._id
+    try {
+      const response = await fetch('http://localhost:4000/comment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          comment,
+          postId,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Comment submitted:', data);
+        // Reset comment field
+        setComment('');
+      } else {
+        console.error('Error submitting comment:', response.status);
+      }
+    } catch (error) {
+      console.error('Error submitting comment:', error);
+    }
+  };
+
   useEffect(() => {
     fetch(`http://localhost:4000/post/${id}`)
       .then(response => {
@@ -38,6 +73,21 @@ export default function PostPage() {
         <img src={`http://localhost:4000/${postInfo.cover}`} alt=""/>
       </div>
       <div className="content" dangerouslySetInnerHTML={{__html:postInfo.content}} />
+      <div>
+        {
+          postInfo.comments.map(comm => <p>{comm.comment}</p>)
+        }
+        </div>
+      <h2>Submit a Comment</h2>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Write your comment..."
+          rows={4}
+        ></textarea>
+        <button type="submit" className="btn">Submit Comment</button>
+      </form>
     </div>
   );
 }
