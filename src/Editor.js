@@ -21,7 +21,9 @@ export default function Editor({value,onChange}) {
       value={value}
       theme={'snow'}
       onChange={onChange}
-      modules={modules} />
+      modules={modules} 
+      className="bg-gray-800 "
+      />
     </div>
   );
 }
