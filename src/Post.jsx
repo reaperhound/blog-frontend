@@ -11,24 +11,8 @@ export default function Post({
   author,
 }) {
   return (
-    // <div className="overflow-hidden rounded-lg shadow transition hover:shadow-lg ">
-    //   <div className="image h-[230px] overflow-hidden w-full">
-    //     <Link to={`/post/${_id}`}>
-    //       <img src={'http://localhost:4000/'+cover} className=" object-cover" alt=""/>
-    //     </Link>
-    //   </div>
-    //   <div className="texts bg-white z-20 p-4 sm:p-6">
-    //     <Link to={`/post/${_id}`}>
-    //     <h2 className="mt-0.5 text-2xl font-semibold text-gray-900">{title}</h2>
-    //     </Link>
-    //     <p className="info">
-    //       <a className="author">{author.username}</a>
-    //       <time className="block text-xs text-gray-100">{formatISO9075(new Date(createdAt))}</time>
-    //     </p>
-    //     <p className="summary">{summary}</p>
-    //   </div>
-    // </div>
-    <article className="flex bg-white transition hover:shadow-xl">
+ 
+    <article className="flex bg-white transition hover:shadow-xl my-4">
       <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
         <time
           datetime="2022-10-10"
